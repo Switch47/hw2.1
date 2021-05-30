@@ -1,4 +1,4 @@
-package org.example.hw2;
+package org.example.hw2.view;
 
 import org.example.hw2.Field;
 import org.example.hw2.FieldStats;
