@@ -1,4 +1,7 @@
-package org.example.hw2;
+package org.example.hw2.Factory;
+
+import org.example.hw2.Field;
+import org.example.hw2.Location;
 
 import java.util.HashMap;
 import java.util.List;

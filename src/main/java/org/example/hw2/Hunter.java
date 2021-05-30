@@ -2,43 +2,22 @@ package org.example.hw2;
 
 import org.example.hw2.Factory.Animal;
 
-import java.util.List;
 import java.util.Iterator;
-import java.util.Random;
+import java.util.List;
 
-public class Fox extends Animal {
+public class Hunter extends Animal {
 
-    // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
-
-
-
-    // The fox's food level, which is increased by eating rabbits.
+    private static final int FOOD_VALUE = 10;
     private int foodLevel;
 
-    /**
-     * Create a fox. A fox can be created as a new born (age zero and not
-     * hungry) or with a random age and food level.
-     *
-     * @param randomAge If true, the fox will have random age and hunger level.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
-     */
 
     @Override
     public void initialize(boolean randomAge, Field field, Location location) {
 
         super.initialize(randomAge, field, location);
-        foodLevel = RANDOM.nextInt(RABBIT_FOOD_VALUE);
+        foodLevel = RANDOM.nextInt(FOOD_VALUE);
     }
 
-    /**
-     * This is what the fox does most of the time: it hunts for rabbits. In the
-     * process, it might breed, die of hunger, or die of old age.
-     *
-     * @param animal A list to return newly born foxes.
-     */
     @Override
     public void act(List<Animal> animal) {
         incrementAge();
@@ -61,22 +40,6 @@ public class Fox extends Animal {
         }
     }
 
-    /**
-     * Make this fox more hungry. This could result in the fox's death.
-     */
-    private void incrementHunger() {
-        foodLevel--;
-        if (foodLevel <= 0) {
-            setDead();
-        }
-    }
-
-    /**
-     * Look for rabbits adjacent to the current location. Only the first live
-     * rabbit is eaten.
-     *
-     * @return Where food was found, or null if it wasn't.
-     */
     private Location findFood() {
         List<Location> adjacent = field.adjacentLocations(location);
         Iterator<Location> it = adjacent.iterator();
@@ -87,7 +50,23 @@ public class Fox extends Animal {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
+                    foodLevel = FOOD_VALUE;
+                    return where;
+                }
+            }
+            else if (animal instanceof Fox) {
+                Fox fox = (Fox) animal;
+                if (fox.isAlive()) {
+                    fox.setDead();
+                    foodLevel = FOOD_VALUE;
+                    return where;
+                }
+            }
+            else if (animal instanceof Tiger) {
+                Tiger tiger = (Tiger) animal;
+                if (tiger.isAlive()) {
+                    tiger.setDead();
+                    foodLevel = FOOD_VALUE;
                     return where;
                 }
             }
@@ -95,26 +74,31 @@ public class Fox extends Animal {
         return null;
     }
 
+    private void incrementHunger() {
+        foodLevel--;
+        if (foodLevel <= 0) {
+            setDead();
+        }
+    }
+
     @Override
     public int getMaxAge() {
-        return 150;
+        return 65;
     }
 
     @Override
     protected double getBreedingProbability() {
-        return 0.1;
+        return 0.05;
     }
 
     @Override
     protected int getMaxLitterSize() {
-        return 4;
+        return 2;
     }
 
     @Override
     protected int getBreedingAge() {
-        return 15;
+        return 18;
     }
 
-
 }
-

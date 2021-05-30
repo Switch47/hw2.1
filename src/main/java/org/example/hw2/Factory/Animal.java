@@ -1,4 +1,7 @@
-package org.example.hw2;
+package org.example.hw2.Factory;
+
+import org.example.hw2.Field;
+import org.example.hw2.Location;
 
 import java.util.List;
 import java.util.Random;
@@ -18,7 +21,7 @@ public abstract class Animal {
     protected static final Random RANDOM = new Random();
 
 
-    public Animal(boolean randomAge, Field field, Location location) {
+    public void initialize(boolean randomAge, Field field, Location location) {
         this.field = field;
         setLocation(location);
         if (randomAge) {
@@ -63,7 +66,7 @@ public abstract class Animal {
     /**
      * Indicate that the fox is no longer alive. It is removed from the field.
      */
-    protected void setDead() {
+    public void setDead() {
         setAlive(false);
         if (location != null) {
             field.clear(location);
@@ -112,7 +115,9 @@ public abstract class Animal {
 
     protected abstract int getBreedingAge();
 
-    protected abstract Animal createYoung(boolean randomAge, Field field, Location location);
+    private Animal createYoung(boolean randomAge, Field field, Location location) {
+        return AnimalFactory.createAnimal(getClass(), field, location);
+    }
 
     /**
      * Check whether or not this rabbit is to give birth at this step. New

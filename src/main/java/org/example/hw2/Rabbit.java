@@ -1,21 +1,13 @@
 package org.example.hw2;
 
+import org.example.hw2.Factory.Animal;
+
 import java.util.List;
 import java.util.Random;
 
 public class Rabbit extends Animal {
 
-    /**
-     * Create a new rabbit. A rabbit may be created with age zero (a new born)
-     * or with a random age.
-     *
-     * @param randomAge If true, the rabbit will have a random age.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
-     */
-    public Rabbit(boolean randomAge, Field field, Location location) {
-        super(randomAge, field, location);
-    }
+
 
     /**
      * This is what the rabbit does most of the time - it runs around. Sometimes
@@ -59,9 +51,5 @@ public class Rabbit extends Animal {
         return 5;
     }
 
-    @Override
-    protected Animal createYoung(boolean randomAge, Field field, Location location) {
-        return new Rabbit(randomAge, field, location);
-    }
 }
 
