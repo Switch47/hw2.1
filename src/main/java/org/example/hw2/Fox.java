@@ -10,7 +10,7 @@ public class Fox extends Animal {
 
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
+    private static final int RABBIT_FOOD_VALUE = 20;
 
 
 
@@ -107,7 +107,7 @@ public class Fox extends Animal {
 
     @Override
     protected int getMaxLitterSize() {
-        return 4;
+        return 2;
     }
 
     @Override

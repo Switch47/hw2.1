@@ -10,7 +10,7 @@ import java.awt.*;
 public enum AnimalType {
     RABBIT(0.12, Rabbit.class, Color.ORANGE),
     FOX(0.1, Fox.class, Color.BLUE),
-    HUNTER(0.05, Hunter.class, Color.RED),
+    HUNTER(0.009, Hunter.class, Color.RED),
     TIGER(0.05, Tiger.class, Color.BLACK);
 
 

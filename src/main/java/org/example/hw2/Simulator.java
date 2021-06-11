@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class Simulator {
+public class Simulator implements Observable{
 
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
@@ -32,6 +32,7 @@ public class Simulator {
     // A graphical view of the simulation.
     private SimulatorView view;
 
+    private ArrayList<Observer> observers = new ArrayList<>();
 
     /**
      * Construct a simulation field with default size.
@@ -142,6 +143,25 @@ public class Simulator {
             Thread.sleep(millisec);
         } catch (InterruptedException ie) {
             // wake up
+        }
+    }
+
+    @Override
+    public void attach(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void detach(Observer o) {
+        int observerIndex = observers.indexOf(o);
+        System.out.println("Observer " + (observerIndex + 1) + " deleted");
+        observers.remove(observerIndex);
+    }
+
+    @Override
+    public void notifyObserver(int step, Field field) {
+        for (Observer observer : observers) {
+            observer.update(step, field);
         }
     }
 }

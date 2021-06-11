@@ -9,7 +9,7 @@ import java.util.List;
 public class Tiger extends Animal {
 
 
-    private static final int FOOD_VALUE = 20;
+    private static final int FOOD_VALUE = 35;
     private int foodLevel;
 
     @Override
@@ -75,12 +75,12 @@ public class Tiger extends Animal {
     }
     @Override
     public int getMaxAge() {
-        return 80;
+        return 100;
     }
 
     @Override
     protected double getBreedingProbability() {
-        return 0.05;
+        return 0.03;
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Tiger extends Animal {
 
     @Override
     protected int getBreedingAge() {
-        return 19;
+        return 20;
     }
 
 }

@@ -7,21 +7,17 @@ import java.util.List;
 
 public class Hunter extends Animal {
 
-    private static final int FOOD_VALUE = 10;
-    private int foodLevel;
-
 
     @Override
     public void initialize(boolean randomAge, Field field, Location location) {
 
         super.initialize(randomAge, field, location);
-        foodLevel = RANDOM.nextInt(FOOD_VALUE);
+
     }
 
     @Override
     public void act(List<Animal> animal) {
         incrementAge();
-        incrementHunger();
         if (isAlive()) {
             giveBirth(animal);
             // Move towards a source of food if found.
@@ -50,7 +46,6 @@ public class Hunter extends Animal {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
-                    foodLevel = FOOD_VALUE;
                     return where;
                 }
             }
@@ -58,7 +53,6 @@ public class Hunter extends Animal {
                 Fox fox = (Fox) animal;
                 if (fox.isAlive()) {
                     fox.setDead();
-                    foodLevel = FOOD_VALUE;
                     return where;
                 }
             }
@@ -66,7 +60,6 @@ public class Hunter extends Animal {
                 Tiger tiger = (Tiger) animal;
                 if (tiger.isAlive()) {
                     tiger.setDead();
-                    foodLevel = FOOD_VALUE;
                     return where;
                 }
             }
@@ -74,21 +67,15 @@ public class Hunter extends Animal {
         return null;
     }
 
-    private void incrementHunger() {
-        foodLevel--;
-        if (foodLevel <= 0) {
-            setDead();
-        }
-    }
 
     @Override
     public int getMaxAge() {
-        return 65;
+        return Integer.MAX_VALUE;
     }
 
     @Override
     protected double getBreedingProbability() {
-        return 0.05;
+        return 0.009;
     }
 
     @Override
@@ -98,7 +85,7 @@ public class Hunter extends Animal {
 
     @Override
     protected int getBreedingAge() {
-        return 18;
+        return Integer.MAX_VALUE;
     }
 
 }
